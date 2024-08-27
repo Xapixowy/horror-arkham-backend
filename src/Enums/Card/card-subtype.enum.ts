@@ -1,4 +1,4 @@
-export enum CardSubtype {
+export enum CardSubtypeEnum {
   PHYSICAL_WEAPON = 'physical_weapon',
   MAGICAL_WEAPON = 'magical_weapon',
   QUEST = 'quest',

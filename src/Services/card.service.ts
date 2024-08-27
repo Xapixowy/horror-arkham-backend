@@ -1,22 +1,41 @@
 import { Injectable } from '@nestjs/common';
+import { CardDto } from '../Dtos/Card/card.dto';
+import { ErrorEnum } from '../Enums/error.enum';
 
 @Injectable()
 export class CardService {
-  private cards: string[] = [];
+  private cards: CardDto[] = [];
 
-  getAll() {
+  getAll(): CardDto[] {
     return this.cards;
   }
 
-  get(id: number) {
+  get(id: number): CardDto {
+    const existingCard = this.cards[id];
+    if (!existingCard) {
+      throw new Error(ErrorEnum.NOT_FOUND);
+    }
     return this.cards[id];
   }
 
-  add(card: string) {
+  add(card: CardDto): void {
     this.cards.push(card);
   }
 
-  remove(id: number) {
+  edit(id: number, card: CardDto): void {
+    const existingCard = this.cards[id];
+    if (!existingCard) {
+      throw new Error(ErrorEnum.NOT_FOUND);
+    }
+    this.cards[id] = card;
+  }
+
+  remove(id: number): CardDto {
+    const existingCard = this.cards[id];
+    if (!existingCard) {
+      throw new Error(ErrorEnum.NOT_FOUND);
+    }
     this.cards.splice(id, 1);
+    return existingCard;
   }
 }

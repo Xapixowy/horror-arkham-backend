@@ -1,3 +1,3 @@
-export enum Language {
+export enum LanguageEnum {
   POLISH = 'pl',
 }
